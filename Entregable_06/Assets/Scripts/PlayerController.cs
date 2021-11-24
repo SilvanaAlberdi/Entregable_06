@@ -8,11 +8,12 @@ public class PlayerController : MonoBehaviour
     private AudioSource playerAudioSource;
     private AudioSource cameraAudioSource;
     private float verticalInput;
+    public float speed = 10f;
     public float gravityModifier = 1;
     public bool gameOver;
     public ParticleSystem explosionParticleSystem;
     public AudioClip explosionClip;
-    private float upLimY = 13.5f;
+    private float upperLimit = 13.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,10 +28,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         verticalInput = Input.GetAxis("Vertical");
+        transform.Translate(Vector3.up * Time.deltaTime * speed * verticalInput);
 
-        if (transform.position.x > upLimY)
+        if (transform.position.x > upperLimit)
         {
-            transform.position = new Vector3(transform.position.x, upLimY, transform.position.z);
+            transform.position = new Vector3(transform.position.x, upperLimit, transform.position.z);
         }
     }
 }
